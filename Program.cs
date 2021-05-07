@@ -79,11 +79,12 @@ namespace HomeWork5._5
         /// <param name="matrix"></param>
         static void EnteringValuesMatrix(ref int[,] matrix)
         {
-
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            int row = matrix.GetLength(0);
+            int col = matrix.GetLength(1);
+            for (int i = 0; i < row; i++)
             {
                 int paddingLeft = 0;
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                for (int j = 0; j < col; j++)
                 {
                     matrix[i, j] = InsertInt(int.MinValue, int.MaxValue);
                     paddingLeft += 15;
@@ -224,7 +225,8 @@ namespace HomeWork5._5
         /// <returns></returns>
         static string CheckProgresiv(params int[] array)
         {
-
+            string str = "";
+            ;
             if (array.Length >= 2)
             {
                 int d;
@@ -235,7 +237,7 @@ namespace HomeWork5._5
                     if (array[i] == trueNextElement)
                     {
                         if (array.Length - 1 == i)
-                            return "Арифметическая прогрессия";
+                            str += "арифметическая";
                     }
                     else break;
                 }
@@ -247,16 +249,23 @@ namespace HomeWork5._5
                     for (int i = 0; i < array.Length; i++)
                     {
                         double trueNextElement = array[0] * Math.Pow(q, i);
-                        if (array[i] == trueNextElement)
+                        if (array[i] == trueNextElement && array[i] != 0)
                         {
                             if (array.Length - 1 == i)
-                                return "Геометрическая прогрессия";
+                            {
+                                if (str.Length != 0)
+                                    str += " и ";
+                                str += "геометрическая";
+                            }
+
                         }
                         else break;
                     }
                 }
                 catch (DivideByZeroException)
                 { }
+                if (str.Length != 0)
+                    return str + " прогрессия";
             }
 
             return "не является прогрессией ";
